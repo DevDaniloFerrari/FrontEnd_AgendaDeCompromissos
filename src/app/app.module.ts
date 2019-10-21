@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,10 +18,11 @@ import { ConsultaComponent } from './consulta/consulta.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
-      { path: 'consulta', component: ConsultaComponent},
       { path: 'paciente', component: PacienteComponent },
+      { path: 'consulta', component: ConsultaComponent},
     ])
   ],
   providers: [],
