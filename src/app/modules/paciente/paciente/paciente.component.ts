@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { PacienteService } from '../shared/paciente/paciente.service';
+import { PacienteService } from '@shared/providers';
 
 @Component({
   selector: 'app-paciente',
@@ -12,15 +12,12 @@ export class PacienteComponent implements OnInit {
 
   //public pacientes = ['dandan','linlin'];
 
-  public pacientes: Paciente[];
 
-  constructor(private _pacienteService: PacienteService) { 
+  constructor(private pacienteService: PacienteService) { 
     
   }
 
   ngOnInit() {
-    this._pacienteService.obterPacientes()
-        .subscribe(data => this.pacientes = data);
   }
 
 }

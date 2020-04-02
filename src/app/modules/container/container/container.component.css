@@ -1,0 +1,11 @@
+.titulo {
+    font-size: 70px;
+    background-color: #21d4fd;
+    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+    overflow: hidden;
+    color: white;
+}
+
+.space li {
+    margin-right: 35px;
+}
