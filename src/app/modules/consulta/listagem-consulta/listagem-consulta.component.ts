@@ -1,6 +1,7 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Consulta } from '@shared/models';
-import { ConsultaService } from '@shared/providers';
+import { Consulta, Paciente } from '@shared/models';
+import { ConsultaService, PacienteService } from '@shared/providers';
 import { DatePipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdicionarConsultaComponent } from '../adicionar-consulta/adicionar-consulta.component';
@@ -12,15 +13,41 @@ import { AdicionarConsultaComponent } from '../adicionar-consulta/adicionar-cons
 })
 export class ListagemConsultaComponent implements OnInit {
 
+  public form: FormGroup;
+
   public consultas: Array<Consulta>;
+  public pacientes: Array<Paciente>;
+
+  public pacienteFiltrado: Paciente;
 
   constructor(
     private consultaService: ConsultaService,
     private datePipe: DatePipe,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private pacienteService: PacienteService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.construirFormulario();
+    this.obterConsultas();
+  }
+
+  private construirFormulario(){
+    this.form = this.formBuilder.group({
+      idPaciente: [0],
+    });
+  }
+
+  public buscar(){
+    this.consultaService.obterConsultasPorPaciente(this.form.value.idPaciente).subscribe(
+      response => {
+        this.consultas = response;
+      }
+    );
+  }
+
+  public limpar(){
     this.obterConsultas();
   }
 
@@ -28,10 +55,19 @@ export class ListagemConsultaComponent implements OnInit {
     this.consultaService.obterConsultas().subscribe(
       response => {
         this.consultas = response;
+        this.obterPacientes();
       },
       error => {
         if (error.status == 406)
           this.consultas = null;
+      }
+    );
+  }
+
+  private obterPacientes(){
+    this.pacienteService.obter().subscribe(
+      response => {
+        this.pacientes = response;
       }
     );
   }

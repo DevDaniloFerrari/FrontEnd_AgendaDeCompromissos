@@ -1,5 +1,23 @@
-<button type="button" class="btn btn-success" (click)="abrirModal()"><i class="fas fa-plus"></i> Adicionar consulta</button>
+<button type="button" class="btn btn-success" (click)="abrirModal()"><i class="fas fa-plus"></i> Adicionar
+    consulta</button>
+
 <div class="container">
+    <div class="row-12">
+        <div class="col-6">
+            <form [formGroup]="form" *ngIf="consultas != null">
+                <div class="form-group">
+                    <label for="nome">Paciente</label>
+                    <select class="form-control form-control-lg" formControlName="idPaciente">
+                        <option value="{{paciente.id}}" ng-bind="idPacienteFiltrado" *ngFor="let paciente of pacientes">{{ paciente.nome }}</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-success" (click)="buscar()"><i class="fas fa-search"></i> Buscar</button>
+            <button type="button" class="btn btn-secondary" (click)="limpar()"><i class="fas fa-eraser"></i> Limpar Filtro</button>
+        </div>
+    </div>
     <div class="row d-flex justify-content-center">
         <div class="col-6">
             <ul class="list-group" *ngFor="let consulta of consultas">
@@ -12,7 +30,7 @@
                         Fim: {{ formatarDataConsulta(consulta.fim) }}
                     </p>
                     <p *ngIf="consulta.observacoes != null">
-                      Observações: {{ consulta.observacoes }}  
+                        Observações: {{ consulta.observacoes }}
                     </p>
                     <button type="button" class="btn btn-success" (click)="finalizar(consulta)">Finalizar</button>
                     <button type="button" class="btn btn-danger" (click)="cancelar(consulta)">Cancelar</button>
