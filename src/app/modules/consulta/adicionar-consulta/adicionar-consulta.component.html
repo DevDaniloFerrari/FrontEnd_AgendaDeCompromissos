@@ -8,10 +8,10 @@
     <form [formGroup]="form">
         <div class="form-group">
             <label for="nome">Paciente</label>
-            <select class="form-control form-control-lg" *ngFor="let paciente of pacientes">
-                <option>{{ paciente.nome }}</option>
+            <select class="form-control form-control-lg" formControlName="idPaciente" *ngFor="let paciente of pacientes">
+                <option value="paciente.id">{{ paciente.nome }}</option>
             </select>
-            <span class="invalid" *ngIf="form.controls.nome.invalid && form.controls.nome.dirty">Preenchimento
+            <span class="invalid" *ngIf="form.controls.idPaciente.invalid && form.controls.idPaciente.dirty">Preenchimento
                 obrigatório</span>
         </div>
         <div class="form-group">
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="fim">Observacoes</label>
-            <textarea type="text" rows="30" cols="30" class="form-control" formControlName="observacoes"
+            <textarea type="text" rows="10" cols="10" class="form-control" formControlName="observacoes"
                 id="observacoes" placeholder="Observacoes"></textarea>
         </div>
     </form>

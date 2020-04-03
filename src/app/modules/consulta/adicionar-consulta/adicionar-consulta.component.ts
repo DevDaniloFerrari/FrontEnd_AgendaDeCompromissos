@@ -2,7 +2,7 @@ import { Paciente } from '@shared/models';
 import { Component, OnInit } from '@angular/core';
 import { ConsultaService } from '@shared/providers';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -17,9 +17,9 @@ export class AdicionarConsultaComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
     private consultaService: ConsultaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -29,11 +29,16 @@ export class AdicionarConsultaComponent implements OnInit {
   private construirFormulario() {
     this.form = this.formBuilder.group({
       id: [0],
-      nome: [null, Validators.required],
-      nascimento: [null, Validators.required]
+      idPaciente: [0, Validators.required],
+      inicio: [null, Validators.required],
+      fim: [null, Validators.required],
+      observacoes: [null, Validators.required]
     });
   }
 
+  public obterPacientes(){
+    this.pacientes
+  }
 
   public fechar() {
     this.activeModal.close(false);
