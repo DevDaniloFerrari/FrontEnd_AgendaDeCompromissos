@@ -1,13 +1,10 @@
-<button type="button" class="btn btn-success" (click)="abrirModal()"><i class="fas fa-plus"></i> Adicionar
-    consulta</button>
-
 <div class="container">
 
-    <div class="row d-flex justify-content-center">
-        <div class="col-10">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-6">
             <form [formGroup]="form" *ngIf="consultas != null">
                 <div class="form-group">
-                    <label for="nome">Paciente</label>
+                    <label for="nome">Buscar por Paciente:</label>
                     <select class="form-control form-control-lg" formControlName="idPaciente">
                         <option value="{{paciente.id}}" ng-bind="idPacienteFiltrado" *ngFor="let paciente of pacientes">
                             {{ paciente.nome }}</option>
@@ -15,17 +12,24 @@
                 </div>
             </form>
         </div>
-        <div class="col-2">
-            <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fas fa-search"></i>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary mr-1" (click)="buscar()"><i class="fas fa-search"></i>
                 Buscar</button>
             <button type="button" class="btn btn-secondary" (click)="limpar()"><i class="fas fa-eraser"></i> Limpar
                 Filtro</button>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
+        <div class="col-6 text-center">
+            <button type="button" class="btn btn-success my-2" (click)="abrirModal()"><i class="fas fa-plus"></i>
+                Adicionar
+                consulta</button>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
         <div class="col-6">
             <ul class="list-group" *ngFor="let consulta of consultas">
-                <li class="list-group-item">
+                <li class="list-group-item my-2">
                     <h6>Paciente: {{ consulta.paciente.nome }}</h6>
                     <p>
                         Inicio: {{ formatarDataConsulta(consulta.inicio) }}
@@ -36,11 +40,15 @@
                     <p *ngIf="consulta.observacoes != null">
                         Observações: {{ consulta.observacoes }}
                     </p>
-                    <button type="button" class="btn btn-success" (click)="finalizar(consulta)">Finalizar</button>
-                    <button type="button" class="btn btn-danger" (click)="cancelar(consulta)">Cancelar</button>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-success mr-5" (click)="finalizar(consulta)"><i
+                                class="fas fa-check"></i> Finalizar</button>
+                        <button type="button" class="btn btn-outline-danger" (click)="cancelar(consulta)"><i
+                                class="far fa-window-close"></i> Cancelar</button>
+                    </div>
                 </li>
             </ul>
-            <h6 *ngIf="consultas == null">Nenhuma consulta encontrada!</h6>
+            <h6 *ngIf="consultas == null" class="text-center">Nenhuma consulta encontrada!</h6>
         </div>
     </div>
 </div>

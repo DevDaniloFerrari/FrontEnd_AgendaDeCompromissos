@@ -1,5 +1,9 @@
-<button type="button" class="btn btn-success" (click)="abrirModalAdicionar()"><i class="fas fa-plus"></i> Adicionar paciente</button>
 <div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 text-center">
+            <button type="button" class="btn btn-success my-1" (click)="abrirModalAdicionar()"><i class="fas fa-plus"></i> Adicionar paciente</button>
+        </div>
+    </div>
     <div class="row d-flex justify-content-center">
         <div class="col-6">
             <ul class="list-group list-group-item-action" *ngFor="let paciente of pacientes">
@@ -8,7 +12,7 @@
                     </a>
                 </div>
             </ul>
-            <h6 *ngIf="pacientes == null">Nenhum paciente encontrado!</h6>
+            <h6 *ngIf="pacientes == null" class="text-center">Nenhum paciente encontrado!</h6>
         </div>
     </div>
 </div>
