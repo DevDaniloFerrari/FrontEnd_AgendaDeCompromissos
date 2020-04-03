@@ -5,6 +5,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { PacienteRoutingModule } from './paciente-routing.module';
 import { DetalhesPacienteComponent } from './detalhes-paciente/detalhes-paciente.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,8 +15,10 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     PacienteRoutingModule,
-    NgbModalModule
+    NgbModalModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers:[DatePipe, ConsultaService]
+  providers: [DatePipe, ConsultaService]
 })
 export class PacienteModule { }

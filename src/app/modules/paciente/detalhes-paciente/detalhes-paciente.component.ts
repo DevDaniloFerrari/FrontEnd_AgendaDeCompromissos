@@ -1,8 +1,9 @@
-import { ConsultaService } from './../../../shared/providers/consulta.service';
+import { PacienteService, ConsultaService } from '@shared/providers';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Paciente, Consulta } from '@shared/models';
 import { DatePipe } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detalhes-paciente',
@@ -14,30 +15,48 @@ export class DetalhesPacienteComponent implements OnInit {
   @Input() paciente: Paciente;
 
   public consultas: Array<Consulta>;
+  public form: FormGroup;
 
   constructor(
     public activeModal: NgbActiveModal,
     private datePipe: DatePipe,
-    private consultaService: ConsultaService
+    private consultaService: ConsultaService,
+    private formBuilder: FormBuilder,
+    private pacienteService: PacienteService
   ) { }
 
   ngOnInit() {
     this.obterConsultas();
+    this.construirFormulario();
+    this.preencherFormulario();
   }
 
-  private obterConsultas(){
+  private construirFormulario() {
+    this.form = this.formBuilder.group({
+      id: [null, Validators.required],
+      nome: [null, Validators.required],
+      nascimento: [null, Validators.required]
+    });
+  }
+
+  private preencherFormulario() {
+    this.form.patchValue(this.paciente);
+    this.form.controls.nascimento.setValue(this.datePipe.transform(this.paciente.nascimento, 'yyyy-MM-dd'))
+  }
+
+  private obterConsultas() {
     this.consultaService.obterConsultasPorPaciente(this.paciente.id).subscribe(
       response => {
         this.consultas = response;
       },
       error => {
-        if(error.status == 406)
+        if (error.status == 406)
           this.consultas = null;
       }
     );
   }
 
-  public fechar(){
+  public fechar() {
     this.activeModal.close(false);
   }
 
@@ -55,6 +74,17 @@ export class DetalhesPacienteComponent implements OnInit {
     }
 
     return null;
+  }
+
+  public editar() {
+    if(!this.form.invalid){
+      this.pacienteService.alterar(this.form.value).subscribe(
+        response => {
+        }
+      );
+    }else{
+      //Aviso
+    }
   }
 
 }

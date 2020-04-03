@@ -15,8 +15,20 @@ export class PacienteService {
     private http: HttpClient
   ) { }
 
-  public obterPacientes(): Observable<Paciente[]> {
+  public obter(): Observable<Array<Paciente>> {
     return this.http.get<Array<Paciente>>(`${this.API_URL}pacientes`);
+  }
+
+  public alterar(paciente: Paciente): Observable<Paciente> {
+    return this.http.put<Paciente>(`${this.API_URL}pacientes`, paciente);
+  }
+
+  public inserir(paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(`${this.API_URL}pacientes`, paciente);
+  }
+
+  public deletar(idPaciente: number): Observable<Paciente> {
+    return this.http.delete<Paciente>(`${this.API_URL}pacientes/${idPaciente}`);
   }
 
 }

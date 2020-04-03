@@ -28,7 +28,7 @@ export class ListagemPacienteComponent implements OnInit {
   }
 
   private obterPacientes(){
-    this.pacienteService.obterPacientes().subscribe(
+    this.pacienteService.obter().subscribe(
       response => {
         this.pacientes = response;
       }
@@ -52,6 +52,10 @@ export class ListagemPacienteComponent implements OnInit {
     });
 
     modalRef.componentInstance.paciente = paciente;
+
+    modalRef.result.then(result => {
+      this.obterPacientes();
+    });
   }
 
 }
