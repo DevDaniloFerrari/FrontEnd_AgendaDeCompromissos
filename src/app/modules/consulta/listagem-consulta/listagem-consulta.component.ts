@@ -43,6 +43,10 @@ export class ListagemConsultaComponent implements OnInit {
     this.consultaService.obterConsultasPorPaciente(this.form.value.idPaciente).subscribe(
       response => {
         this.consultas = response;
+      },
+      error => {
+        if (error.status == 406)
+          this.consultas = null;
       }
     );
   }

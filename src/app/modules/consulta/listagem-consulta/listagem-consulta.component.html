@@ -2,20 +2,24 @@
     consulta</button>
 
 <div class="container">
-    <div class="row-12">
-        <div class="col-6">
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-10">
             <form [formGroup]="form" *ngIf="consultas != null">
                 <div class="form-group">
                     <label for="nome">Paciente</label>
                     <select class="form-control form-control-lg" formControlName="idPaciente">
-                        <option value="{{paciente.id}}" ng-bind="idPacienteFiltrado" *ngFor="let paciente of pacientes">{{ paciente.nome }}</option>
+                        <option value="{{paciente.id}}" ng-bind="idPacienteFiltrado" *ngFor="let paciente of pacientes">
+                            {{ paciente.nome }}</option>
                     </select>
                 </div>
             </form>
         </div>
-        <div class="col-6">
-            <button type="button" class="btn btn-success" (click)="buscar()"><i class="fas fa-search"></i> Buscar</button>
-            <button type="button" class="btn btn-secondary" (click)="limpar()"><i class="fas fa-eraser"></i> Limpar Filtro</button>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fas fa-search"></i>
+                Buscar</button>
+            <button type="button" class="btn btn-secondary" (click)="limpar()"><i class="fas fa-eraser"></i> Limpar
+                Filtro</button>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
