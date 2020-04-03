@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Paciente, Consulta } from '@shared/models';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalhes-paciente',
@@ -22,7 +23,8 @@ export class DetalhesPacienteComponent implements OnInit {
     private datePipe: DatePipe,
     private consultaService: ConsultaService,
     private formBuilder: FormBuilder,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -80,10 +82,11 @@ export class DetalhesPacienteComponent implements OnInit {
     if(!this.form.invalid){
       this.pacienteService.alterar(this.form.value).subscribe(
         response => {
+          this.toastr.success('Usuario editado com sucesso!');
         }
       );
     }else{
-      //Aviso
+      this.toastr.warning('Preencha os campos necessários!');
     }
   }
 
