@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Consulta } from '@shared/models';
 import { ConsultaService } from '@shared/providers';
 import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdicionarConsultaComponent } from '../adicionar-consulta/adicionar-consulta.component';
 
 @Component({
   selector: 'app-listagem-consulta',
@@ -14,20 +16,21 @@ export class ListagemConsultaComponent implements OnInit {
 
   constructor(
     private consultaService: ConsultaService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
     this.obterConsultas();
   }
 
-  private obterConsultas(){
+  private obterConsultas() {
     this.consultaService.obterConsultas().subscribe(
       response => {
         this.consultas = response;
       },
       error => {
-        if(error.status == 406)
+        if (error.status == 406)
           this.consultas = null;
       }
     );
@@ -41,14 +44,27 @@ export class ListagemConsultaComponent implements OnInit {
     return null;
   }
 
-  public finalizar(consulta: Consulta){
+  public finalizar(consulta: Consulta) {
     this.consultaService.finalizarConsulta(consulta.id).toPromise();
     this.obterConsultas();
   }
 
-  public cancelar(consulta: Consulta){
+  public cancelar(consulta: Consulta) {
     this.consultaService.cancelarConsulta(consulta.id).toPromise();
     this.obterConsultas();
+  }
+
+  public abrirModal() {
+    const modalRef = this.modalService.open(AdicionarConsultaComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    modalRef.result.then(result => {
+      this.obterConsultas();
+    });
   }
 
 }
