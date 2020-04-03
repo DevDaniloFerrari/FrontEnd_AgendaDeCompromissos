@@ -82,12 +82,21 @@ export class DetalhesPacienteComponent implements OnInit {
     if(!this.form.invalid){
       this.pacienteService.alterar(this.form.value).subscribe(
         response => {
-          this.toastr.success('Usuário editado com sucesso!');
+          this.toastr.success('Paciente editado com sucesso!');
         }
       );
     }else{
       this.toastr.warning('Preencha os campos necessários!');
     }
+  }
+
+  public excluir(){
+    this.pacienteService.deletar(this.form.value.id).subscribe(
+      reponse => {
+        this.toastr.success('Paciente excluído com sucesso!');
+        this.fechar();
+      }
+    );
   }
 
 }

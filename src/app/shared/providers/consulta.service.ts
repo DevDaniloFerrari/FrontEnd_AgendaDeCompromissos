@@ -29,6 +29,9 @@ export class ConsultaService {
 
   public cancelarConsulta(idConsulta: number): Observable<number>{
     return this.http.delete<number>(`${this.API_URL}consultas/cancelamento/${idConsulta}`);
+  }
 
+  public inserir(consulta: Consulta): Observable<Consulta>{
+    return this.http.post<Consulta>(`${this.API_URL}consultas`, consulta);
   }
 }

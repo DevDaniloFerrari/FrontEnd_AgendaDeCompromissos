@@ -45,13 +45,18 @@ export class ListagemConsultaComponent implements OnInit {
   }
 
   public finalizar(consulta: Consulta) {
-    this.consultaService.finalizarConsulta(consulta.id).toPromise();
-    this.obterConsultas();
+    this.consultaService.finalizarConsulta(consulta.id).subscribe(
+      response => {
+        this.obterConsultas();
+      });
   }
 
   public cancelar(consulta: Consulta) {
-    this.consultaService.cancelarConsulta(consulta.id).toPromise();
-    this.obterConsultas();
+    this.consultaService.cancelarConsulta(consulta.id).subscribe(
+      response => {
+        this.obterConsultas();
+      }
+    );
   }
 
   public abrirModal() {

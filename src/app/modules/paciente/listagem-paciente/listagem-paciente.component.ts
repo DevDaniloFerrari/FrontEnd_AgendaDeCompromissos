@@ -28,10 +28,14 @@ export class ListagemPacienteComponent implements OnInit {
     this.obterPacientes();
   }
 
-  private obterPacientes(){
+  private obterPacientes() {
     this.pacienteService.obter().subscribe(
       response => {
         this.pacientes = response;
+      },
+      error => {
+        if (error.status == 406)
+          this.pacientes = null;
       }
     );
   }
@@ -44,7 +48,7 @@ export class ListagemPacienteComponent implements OnInit {
     return null;
   }
 
-  public abrirModalDetalhes(paciente: Paciente){
+  public abrirModalDetalhes(paciente: Paciente) {
     const modalRef = this.modalService.open(DetalhesPacienteComponent, {
       centered: true,
       size: 'lg',
@@ -59,7 +63,7 @@ export class ListagemPacienteComponent implements OnInit {
     });
   }
 
-  public abrirModalAdicionar(){
+  public abrirModalAdicionar() {
     const modalRef = this.modalService.open(AdicionarPacienteComponent, {
       centered: true,
       size: 'lg',

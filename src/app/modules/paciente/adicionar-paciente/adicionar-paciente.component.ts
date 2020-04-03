@@ -40,7 +40,7 @@ export class AdicionarPacienteComponent implements OnInit {
     if(!this.form.invalid){
       this.pacienteService.inserir(this.form.value).subscribe(
         response => {
-          this.toastr.success('Usuário adicionado com sucesso!');
+          this.toastr.success('Paciente adicionado com sucesso!');
           this.fechar();
         }
       );

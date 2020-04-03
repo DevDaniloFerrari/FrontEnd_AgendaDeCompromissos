@@ -11,6 +11,9 @@
                     <p>
                         Fim: {{ formatarDataConsulta(consulta.fim) }}
                     </p>
+                    <p *ngIf="consulta.observacoes != null">
+                      Observações: {{ consulta.observacoes }}  
+                    </p>
                     <button type="button" class="btn btn-success" (click)="finalizar(consulta)">Finalizar</button>
                     <button type="button" class="btn btn-danger" (click)="cancelar(consulta)">Cancelar</button>
                 </li>

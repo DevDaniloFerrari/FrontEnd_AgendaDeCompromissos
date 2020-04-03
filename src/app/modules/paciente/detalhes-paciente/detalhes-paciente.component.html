@@ -20,6 +20,7 @@
         </div>
     </form>
     <button type="button" class="btn btn-primary" (click)="editar()"><i class="fas fa-edit"></i> Editar</button>
+    <button type="button" class="btn btn-danger float-right" (click)="excluir()"><i class="fas fa-trash"></i> Excluir</button>
     <hr>
     <h6>Consultas:</h6>
     <ul class="list-group" *ngFor="let consulta of consultas">
@@ -35,5 +36,5 @@
     <h6 *ngIf="consultas == null">Nenhuma consulta encontrada!</h6>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fechar()">Fechar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fechar()"><i class="fas fa-ban"></i> Fechar</button>
 </div>

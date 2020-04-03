@@ -1,6 +1,6 @@
-import { Paciente } from '@shared/models';
+import { Paciente, Consulta } from '@shared/models';
 import { Component, OnInit } from '@angular/core';
-import { ConsultaService } from '@shared/providers';
+import { ConsultaService, PacienteService } from '@shared/providers';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,11 +19,13 @@ export class AdicionarConsultaComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private consultaService: ConsultaService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private pacienteService: PacienteService
   ) { }
 
   ngOnInit() {
     this.construirFormulario();
+    this.obterPacientes();
   }
 
   private construirFormulario() {
@@ -37,7 +39,11 @@ export class AdicionarConsultaComponent implements OnInit {
   }
 
   public obterPacientes(){
-    this.pacientes
+    this.pacienteService.obter().subscribe(
+      response => {
+        this.pacientes = response;
+      }
+    );
   }
 
   public fechar() {
@@ -45,7 +51,30 @@ export class AdicionarConsultaComponent implements OnInit {
   }
 
   public inserir() {
+    if(!this.form.invalid){
+      var consulta = this.obterConsulta();
+      this.consultaService.inserir(consulta).subscribe(
+        response => {
+          this.toastr.success('Consulta adicionada com sucesso!');
+          this.fechar();
+        }
+      );
+    }else{
+      this.toastr.warning('Preencha os campos necessários!');
+    }
+  }
 
+  private obterConsulta(): Consulta{
+    var consulta = new Consulta();
+
+    consulta = this.form.value;
+
+    var paciente = new Paciente();
+    paciente.id = this.form.value.idPaciente;
+
+    consulta.paciente = paciente;
+
+    return consulta;
   }
 
 }
