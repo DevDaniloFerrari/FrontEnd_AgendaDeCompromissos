@@ -57,6 +57,10 @@ export class AdicionarConsultaComponent implements OnInit {
         response => {
           this.toastr.success('Consulta adicionada com sucesso!');
           this.fechar();
+        },
+        error => {
+          if(error.error == 'Exception of type \'api.agenda.de.compromissos.Exceptions.ConsultasNoMesmoPeriodoException\' was thrown.')
+            this.toastr.warning('Já existe uma consulta nesse período!');
         }
       );
     }else{
