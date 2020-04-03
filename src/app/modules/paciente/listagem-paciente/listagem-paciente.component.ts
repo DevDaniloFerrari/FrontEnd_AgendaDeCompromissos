@@ -1,3 +1,4 @@
+import { AdicionarPacienteComponent } from './../adicionar-paciente/adicionar-paciente.component';
 import { DetalhesPacienteComponent } from './../detalhes-paciente/detalhes-paciente.component';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { PacienteService } from '@shared/providers';
@@ -43,7 +44,7 @@ export class ListagemPacienteComponent implements OnInit {
     return null;
   }
 
-  public abrirModal(paciente: Paciente){
+  public abrirModalDetalhes(paciente: Paciente){
     const modalRef = this.modalService.open(DetalhesPacienteComponent, {
       centered: true,
       size: 'lg',
@@ -57,5 +58,19 @@ export class ListagemPacienteComponent implements OnInit {
       this.obterPacientes();
     });
   }
+
+  public abrirModalAdicionar(){
+    const modalRef = this.modalService.open(AdicionarPacienteComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    modalRef.result.then(result => {
+      this.obterPacientes();
+    });
+  }
+
 
 }

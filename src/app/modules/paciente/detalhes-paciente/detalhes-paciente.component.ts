@@ -82,7 +82,7 @@ export class DetalhesPacienteComponent implements OnInit {
     if(!this.form.invalid){
       this.pacienteService.alterar(this.form.value).subscribe(
         response => {
-          this.toastr.success('Usuario editado com sucesso!');
+          this.toastr.success('Usuário editado com sucesso!');
         }
       );
     }else{
