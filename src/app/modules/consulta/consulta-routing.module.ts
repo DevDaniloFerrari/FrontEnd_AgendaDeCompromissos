@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConsultaComponent } from './consulta/consulta.component';
+import { ListagemConsultaComponent } from './listagem-consulta/listagem-consulta.component';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: ConsultaComponent
+        component: ListagemConsultaComponent
     }
 ];
 

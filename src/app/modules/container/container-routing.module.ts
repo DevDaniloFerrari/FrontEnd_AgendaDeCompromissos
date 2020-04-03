@@ -9,6 +9,10 @@ const routes: Routes = [
         component: ContainerComponent,
         children: [
             {
+                path: '',
+                redirectTo: 'paciente'
+            },
+            {
                 path: 'paciente',
                 loadChildren: () => import('../paciente/paciente.module').then(m => m.PacienteModule)
             },

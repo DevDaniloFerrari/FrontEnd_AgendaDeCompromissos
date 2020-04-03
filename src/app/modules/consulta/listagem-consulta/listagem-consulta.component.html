@@ -1,0 +1,21 @@
+<button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar consulta</button>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <ul class="list-group" *ngFor="let consulta of consultas">
+                <li class="list-group-item">
+                    <h6>Paciente: {{ consulta.paciente.nome }}</h6>
+                    <p>
+                        Inicio: {{ formatarDataConsulta(consulta.inicio) }}
+                    </p>
+                    <p>
+                        Fim: {{ formatarDataConsulta(consulta.fim) }}
+                    </p>
+                    <button type="button" class="btn btn-success" (click)="finalizar(consulta)">Finalizar</button>
+                    <button type="button" class="btn btn-danger" (click)="cancelar(consulta)">Cancelar</button>
+                </li>
+            </ul>
+            <h6 *ngIf="consultas == null">Nenhuma consulta encontrada!</h6>
+        </div>
+    </div>
+</div>

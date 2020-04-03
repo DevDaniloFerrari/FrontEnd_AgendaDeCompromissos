@@ -1,5 +1,7 @@
-export class Paciente {
-    idPaciente: number;
-    idNome: string;
-    idNascimento: Date;
+import { Pessoa } from './interfaces';
+
+export class Paciente implements Pessoa{
+    id: number;
+    nome: string;
+    nascimento: Date;
 }
